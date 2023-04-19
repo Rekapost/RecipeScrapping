@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="TestSuite" duration-ms="172703" started-at="2023-04-19T16:20:42 CDT" finished-at="2023-04-19T16:23:35 CDT">
+    <groups>
+    </groups>
+    <test name="ChromeTest" duration-ms="172703" started-at="2023-04-19T16:20:42 CDT" finished-at="2023-04-19T16:23:35 CDT">
+      <class name="testCases.TarladalalWebScrapping">
+        <test-method status="PASS" signature="setup(java.lang.String)[pri:0, instance:testCases.TarladalalWebScrapping@5e955596]" name="setup" is-config="true" duration-ms="18349" started-at="2023-04-19T16:20:42 CDT" finished-at="2023-04-19T16:21:00 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="jobSearchTestCase()[pri:1, instance:testCases.TarladalalWebScrapping@5e955596]" name="jobSearchTestCase" duration-ms="16120" started-at="2023-04-19T16:21:01 CDT" finished-at="2023-04-19T16:21:17 CDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jobSearchTestCase -->
+        <test-method status="PASS" signature="readFromExcel()[pri:2, instance:testCases.TarladalalWebScrapping@5e955596]" name="readFromExcel" duration-ms="134724" started-at="2023-04-19T16:21:17 CDT" finished-at="2023-04-19T16:23:31 CDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readFromExcel -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testCases.TarladalalWebScrapping@5e955596]" name="tearDown" is-config="true" duration-ms="3169" started-at="2023-04-19T16:23:32 CDT" finished-at="2023-04-19T16:23:35 CDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- testCases.TarladalalWebScrapping -->
+    </test> <!-- ChromeTest -->
+  </suite> <!-- TestSuite -->
+</testng-results>
