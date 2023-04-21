@@ -6,7 +6,11 @@
     <classes>     
           <!-- <class name="testCases.VeganDiabeticWebScrapping"/> -->
        <!-- <class name="testCases.HypertensionScraping"/> -->
-          <class name="testCases.VeganHypertensionScraping"/> 
+        <!--  <class name="testCases.VeganHypertensionScraping"/> -->
+          <!-- <class name="testCases.AllFoodCategoriesDiabetic"/> -->
+             <class name="testCases.samplediabetic"/> 
+           
+          
        
     </classes>
   </test> <!-- Test -->
