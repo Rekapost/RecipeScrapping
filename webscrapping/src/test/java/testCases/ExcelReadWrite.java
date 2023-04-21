@@ -2,6 +2,8 @@ package testCases;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -121,6 +123,36 @@ public class ExcelReadWrite {
 			 fileinput.close();
 			 fileoutput.close();
 			}
+			
+//			public void setCellData(String sheetName, int rownum, int column, List<String> data) {
+//				// TODO Auto-generated method stub
+//				File xlfile=new File(path);			
+//				if(!xlfile.exists())   // if file not exists then create new file
+//				{
+//					workbook=new XSSFWorkbook();
+//					fileoutput=new FileOutputStream(path);
+//					workbook.write(fileoutput);
+//				}
+//				fileinput=new FileInputStream(path);
+//				workbook=new XSSFWorkbook(fileinput);
+//				 
+//				 if(workbook.getSheetIndex(sheetName)==-1)  // if sheet not exists then create new sheet
+//					 workbook.createSheet(sheetName);
+//				 
+//				 sheet=workbook.getSheet(sheetName);
+//				 
+//				 if(sheet.getRow(rownum)==null)  // if row not exists then create new row
+//					 sheet.createRow(rownum);
+//				 row=sheet.getRow(rownum);
+//				 
+//				 cell=row.createCell(column);
+//				 cell.setCellValue(data);
+//				 fileoutput=new FileOutputStream(path);
+//				 workbook.write(fileoutput);
+//				 workbook.close();
+//				 fileinput.close();
+//				 fileoutput.close();
+//			}
 			 
 			 public void fillGreenColor(String sheetName, int rownum,int column) throws IOException
 			 {
@@ -163,5 +195,7 @@ public class ExcelReadWrite {
 				fileinput.close();
 				fileoutput.close();
 			 }
+
+			
 	
 }

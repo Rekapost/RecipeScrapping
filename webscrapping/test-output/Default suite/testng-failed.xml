@@ -8,6 +8,7 @@
           <include name="setup"/>
           <include name="readFromExcel"/>
           <include name="tearDown"/>
+          <include name="jobSearchTestCase"/>
         </methods>
       </class> <!-- testCases.TarladalalWebScrapping -->
     </classes>

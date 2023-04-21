@@ -47,12 +47,12 @@ public class BaseClass  {
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 		chromeOptions.setAcceptInsecureCerts(true);
-		chromeOptions.setScriptTimeout(Duration.ofSeconds(30));
-		chromeOptions.setPageLoadTimeout(Duration.ofMillis(30000));
-		chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
-		chromeOptions.addArguments("--remote-allow-origins=*");	  
-		driver =new ChromeDriver(chromeOptions);	
+//		chromeOptions.setScriptTimeout(Duration.ofSeconds(30));
+//		chromeOptions.setPageLoadTimeout(Duration.ofMillis(30000));
+//      chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
 		
+		chromeOptions.addArguments("--remote-allow-origins=*");	  
+		driver =new ChromeDriver(chromeOptions);			
 		}
 		
 		else if(br.equalsIgnoreCase("firefox")){
@@ -86,7 +86,7 @@ public class BaseClass  {
 	@AfterClass
 	public void tearDown()
 	{
-		driver.quit();	 // ************************	
+	//	driver.quit();	 // ************************	
 	}
 	
 	public void captureScreen(WebDriver driver, String tname) throws IOException
