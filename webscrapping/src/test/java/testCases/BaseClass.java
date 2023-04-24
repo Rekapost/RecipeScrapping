@@ -2,6 +2,7 @@ package testCases;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,6 +19,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -52,7 +56,9 @@ public class BaseClass  {
 //      chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
 		//disableChromeImages(options;)
 		chromeOptions.addArguments("--remote-allow-origins=*");	  
-		driver =new ChromeDriver(chromeOptions);			
+		//driver =new ChromeDriver(chromeOptions);	
+		disableChromeImages(chromeOptions);
+		driver = WebDriverManager.chromedriver().capabilities(chromeOptions).create();
 		}
 		
 		else if(br.equalsIgnoreCase("firefox")){
@@ -98,5 +104,19 @@ public class BaseClass  {
 		FileHandler.copy(sourceFile, destinationFile);
 		System.out.println("Screenshot Taken");
 	}	
+	
+	public void WaitForElement(WebElement element) {
+		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
+
+	}
+	
+	 public static ChromeOptions disableChromeImages(ChromeOptions options) {
+		  HashMap<String,Object> imagesMap=new HashMap<String,Object>();
+		  imagesMap.put("images", 2);
+		  HashMap<String,Object> prefsMap=new HashMap<String,Object>();
+		  prefsMap.put("profile.default_content_setting_values", imagesMap);
+		  options.setExperimentalOption("prefs", prefsMap);
+		  return options;
+		 }  
 }
 

@@ -8,11 +8,12 @@
        
          <!--     <class name="testCases.VeganDiabeticWebScrapping"/>  -->
                      
-     <!--  <class name="Eli.HypothyroidTestCase"/>            -->
-     <!--  <class name="Eli.PCOS_TestCase"/>             -->
-     <!--  <class name="Eli.HypertensionTestCase"/>      -->    
-     <!--  <class name="testCases.DDT"/>                 -->   
-    <class name="Eli.Sample_DDT"/>               
+      <!--   <class name="Eli.HypothyroidTestCase"/>       -->     
+     <!--   <class name="Eli.PCOS_TestCase"/>             -->
+     <!--   <class name="Eli.HypertensionTestCase"/>      -->    
+                     
+            <class name="Eli.Sample_DDT"/>    
+     <!--   <class name="testCases.dDT_Updated"/>        -->     
      
     </classes>
     

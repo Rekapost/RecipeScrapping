@@ -42,7 +42,6 @@ public class Sample_DDT extends BaseClass {
 	int r;
 	int pgSize;
 	common_Utilities common = new common_Utilities();
-
 	
 	@DataProvider(name = "loginData")
 	public String[][] getExcelData() throws IOException {
@@ -65,15 +64,8 @@ public class Sample_DDT extends BaseClass {
 	
 	@Test(dataProvider = "loginData") // (String searchinput)
 	public void loginWithInput(String p, String searchinput) throws IOException, InterruptedException {
-		List<String> recipeIDList = new ArrayList<String>();
-		List<String[]> scrapedData = new ArrayList<String[]>();
-		
-		
-//		List<LinkedHashMap<String, String>> scrapedData=  new ArrayList<>();
-//		//LinkedHashMap<String, String>> = scrapedData List<LinkedHashMap<String,String>>();	
-//		LinkedHashMap<String, String> eachData = new LinkedHashMap<String, String>();
-		
-		 	
+		List<String[]> scrapedData = new ArrayList<String[]>();		
+	
 		diabetic_eli_List = new ArrayList<String>();
 		System.out.println("Opening tarladalal website ");
 		driver.manage().window().maximize();
@@ -97,6 +89,8 @@ public class Sample_DDT extends BaseClass {
 		Thread.sleep(1000);
 		// && search_data=reader.getCellData("diabetic_list", i, 0);		
 		
+		
+// reading diabetes eliminated list		
 		String diabetes = reader.getCellData("diabetic_eliminated", 0, 0);
 		int diabrowSize = reader.getRowCount("diabetic_eliminated");
 		System.out.println(" row size " + diabrowSize);
@@ -107,7 +101,7 @@ public class Sample_DDT extends BaseClass {
 //			System.out.println(diabetes_data);
 			diabetic_eli_List.add(diabetes_data); 
 //			System.out.println(diabetes_data);
-			/// *******************
+/// *******************
 				}
 		System.out.println("search input " + searchinput);
 //						searchInputArray.add(search_input);  ///*******************
@@ -131,9 +125,7 @@ public class Sample_DDT extends BaseClass {
 			pgSize = pagelist.size();
 			System.out.println(" page size no:" + pagelist.size());			
 		}
-
 		
-
 //		List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
 //		int pgSize = pagelist.size();
 //		System.out.println(" page size no:" + pagelist.size());
@@ -157,11 +149,11 @@ public class Sample_DDT extends BaseClass {
 //						   Thread.sleep(1000);
 //						   pagei.click();}
 ////						}
-		nofrec = driver.findElements(By.xpath("//div[@class='rcc_recipecard']"));
+		 nofrec = driver.findElements(By.xpath("//div[@class='rcc_recipecard']"));
 
 //						 r=1;	i=1;
 //						 for ( r = 1; r <= noOfRecipePerPage; r++)  {
-		for (int x = 1; x <=pgSize ; x++) {
+		 for (int x = 1; x <=pgSize ; x++) {
 			System.out.println("test1first");
 			if (x > 1) {
 				if(searchinput.equalsIgnoreCase("Vegan Diabetic")) {
@@ -228,14 +220,24 @@ public class Sample_DDT extends BaseClass {
 
 //				recipe_Title = driver.findElement(By.xpath(
 //						"/html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[2]/div["+r+"]/div[3]/span[1]/a"));
-				Thread.sleep(1000);
-				recipe_Title = driver.findElement(By.xpath(
-						"//div[@id='maincontent']/div/div[2]/div["+ r +"]/div[3]/span[1]/a"));
-				//*[@id="rcp33705"]/div[3]/span[1]/a
-		
-				//div[@id='maincontent']/div/div[2]/div[" + j + "]/div[3]/span[1]/a
 				
+				//if(searchinput.equalsIgnoreCase("Vegan Diabetic")) {
+				try {
+					Thread.sleep(1000);
+					recipe_Title = driver.findElement(By.xpath(
+							"//div[@id='maincontent']/div/div[2]/div["+r+"]/div[3]/span[1]/a"));
+					action.moveToElement(recipe_Title).click().perform();
+				   }
+			    catch(Exception e){	
+				Thread.sleep(1000);
+	//			recipe_Title = driver.findElement(By.xpath("//div[@id='maincontent']/div/div[2]/div["+ r +"]/div[3]/span[1]/a"));
+				recipe_Title = driver.findElement(By.xpath(
+						"/html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[2]/div["+r+"]/div[3]/span[1]/a"));				
 				action.moveToElement(recipe_Title).click().perform();
+				System.out.println(" absolute path not working ");
+			    }
+				
+				
 				Thread.sleep(1000);
 				js.executeScript("window.scrollBy(0,250)", "");
 				Thread.sleep(1000);

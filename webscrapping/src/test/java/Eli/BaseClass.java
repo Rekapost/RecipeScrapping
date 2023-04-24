@@ -91,7 +91,7 @@ public class BaseClass  {
 	@AfterClass
 	public void tearDown()
 	{
-	//	driver.quit();	 // ************************	
+	//  driver.quit();	 // ************************	
 	}
 	
 	public void captureScreen(WebDriver driver, String tname) throws IOException
@@ -103,6 +103,7 @@ public class BaseClass  {
 		FileHandler.copy(sourceFile, destinationFile);
 		System.out.println("Screenshot Taken");
 	}
+	
 	public void WaitForElement(WebElement element) {
 		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
 

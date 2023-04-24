@@ -39,8 +39,7 @@ public class dDT_Updated extends BaseClass {
 		List<WebElement> nofrec;
 		List<String> diabetic_eli_List;
 		int r;
-		int pgSize;
-		
+		int pgSize;		
 		common_Utilities common = new common_Utilities();
 
 		
@@ -64,7 +63,7 @@ public class dDT_Updated extends BaseClass {
 
 		
 		@Test(dataProvider = "loginData") // (String searchinput)
-		public void loginWithInput(String p, String searchinput) throws IOException, InterruptedException {
+		public void searchWithInput(String p, String searchinput) throws IOException, InterruptedException {
 			List<String> recipeIDList = new ArrayList<String>();
 			diabetic_eli_List = new ArrayList<String>();
 			System.out.println("Opening tarladalal website ");
@@ -89,6 +88,7 @@ public class dDT_Updated extends BaseClass {
 			Thread.sleep(1000);
 			// && search_data=reader.getCellData("diabetic_list", i, 0);
 			
+///////////////////// Reading diabetes eleminated list	 
 			
 			String diabetes = reader.getCellData("diabetic_eliminated", 0, 0);
 			int diabrowSize = reader.getRowCount("diabetic_eliminated");
@@ -100,8 +100,10 @@ public class dDT_Updated extends BaseClass {
 //				System.out.println(diabetes_data);
 				diabetic_eli_List.add(diabetes_data); 
 //				System.out.println(diabetes_data);
-				/// *******************
+			
 					}
+/////////////////////////Entering InPut
+			
 			System.out.println("search input " + searchinput);
 //							searchInputArray.add(search_input);  ///*******************
 			try {
@@ -154,11 +156,11 @@ public class dDT_Updated extends BaseClass {
 
 //							 r=1;	i=1;
 //							 for ( r = 1; r <= noOfRecipePerPage; r++)  {
-			for (int x = 1; x <= 2; x++) {
+			for (int x = 1; x <= pgSize; x++) {
 				System.out.println("test1first");
 				if (x > 1) {
 					if(searchinput=="Vegan Diabetic") {
-					System.out.println("test2first");
+					System.out.println("test vegan first");
 					WebElement pagei = driver.findElement(
 //					By.xpath("//div[@id='cardholder']//div[@style='text-align:right;padding-bottom:15px;']/a[@class='respglink'] and text()='"+x+"']")); /// html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[1]/div[2]/a['"+j+"']
 					By.xpath("//div[@id='maincontent']//div[2]//a[@class='respglink' and text()='"+x+"']")); /// html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[1]/div[2]/a['"+j+"']
@@ -186,10 +188,10 @@ public class dDT_Updated extends BaseClass {
 				
 				r = 1;
 				for (WebElement we : nofrec) {
-					System.out.println("test3first");
+					System.out.println("recipes test3first");
 					System.out.println("r value:" + r);
 					System.out.println("No.of Rows in a page:" + noOfRecipePerPage);
-										if(r==5) {
+										if(r==3) {
 											break;
 										}
 
@@ -323,7 +325,7 @@ public class dDT_Updated extends BaseClass {
 					driver.navigate().refresh();
 					r++;
 				}	
-				}
+			    	}
 			}//test
 		}
 	}

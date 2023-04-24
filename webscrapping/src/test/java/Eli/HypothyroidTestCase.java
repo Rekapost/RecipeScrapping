@@ -1,5 +1,4 @@
 package Eli;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class HypothyroidTestCase extends BaseClass{
 	}
 
 	@Test(dataProvider = "loginData") // (String searchinput)
-	public void loginWithInput(String p, String searchinput) throws IOException, InterruptedException {
+	public void searchWithInput(String p, String searchinput) throws IOException, InterruptedException {
 		List<String> recipeIDList = new ArrayList<String>();
 		System.out.println("Opening tarladalal website ");
 		driver.manage().window().maximize();
@@ -93,7 +92,7 @@ public class HypothyroidTestCase extends BaseClass{
 			e.printStackTrace();
 		}
 		Thread.sleep(1000);
-		if(searchinput=="Vegan Hypothyroid") {
+		if(searchinput.equalsIgnoreCase("Vegan Hypothyroid")) {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
 			pgSize = pagelist.size();
 			System.out.println(" page size no:" + pagelist.size());}
@@ -133,11 +132,11 @@ public class HypothyroidTestCase extends BaseClass{
 
 //						 r=1;	i=1;
 //						 for ( r = 1; r <= noOfRecipePerPage; r++)  {
-		for (int x = 1; x <= 2; x++) {
-			System.out.println("test1first");
+		for (int x = 1; x <= pgSize; x++) {
+			System.out.println("test page 1");
 			if (x > 1) {
-				if(searchinput=="Vegan Hypothyroid") {
-				System.out.println("test2first");
+				if(searchinput.equalsIgnoreCase("Vegan Hypothyroid")) {
+				System.out.println("test vegan first");
 				WebElement pagei = driver.findElement(
 //				By.xpath("//div[@id='cardholder']//div[@style='text-align:right;padding-bottom:15px;']/a[@class='respglink'] and text()='"+x+"']")); /// html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[1]/div[2]/a['"+j+"']
 				By.xpath("//div[@id='maincontent']//div[2]//a[@class='respglink' and text()='"+x+"']")); /// html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[1]/div[2]/a['"+j+"']
@@ -167,7 +166,7 @@ public class HypothyroidTestCase extends BaseClass{
 			
 			r = 1;
 			for (WebElement we : nofrec) {
-				System.out.println("test3first");
+				System.out.println("recipes test3first");
 				System.out.println("r value:" + r);
 				System.out.println("No.of Rows in a page:" + noOfRecipePerPage);
 									if(r==3) {
@@ -198,11 +197,28 @@ public class HypothyroidTestCase extends BaseClass{
 					r = 9;
 				}
 
+				
+/*				//div[@id='maincontent']/div/div[2]/div[" + j + "]/div[3]/span[1]/a			
 				recipe_Title = driver.findElement(By.xpath(
 						"/html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[2]/div[" + r + "]/div[3]/span[1]/a"));
-
 				action.moveToElement(recipe_Title).click().perform();
 				Thread.sleep(500);
+				
+*/
+				try {
+					Thread.sleep(1000);
+					recipe_Title = driver.findElement(By.xpath(
+							"//div[@id='maincontent']/div/div[2]/div["+r+"]/div[3]/span[1]/a"));
+					action.moveToElement(recipe_Title).click().perform();
+				   }
+				catch(Exception e){	
+				Thread.sleep(1000);
+				//			recipe_Title = driver.findElement(By.xpath("//div[@id='maincontent']/div/div[2]/div["+ r +"]/div[3]/span[1]/a"));
+				recipe_Title = driver.findElement(By.xpath(
+						"/html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[2]/div["+r+"]/div[3]/span[1]/a"));				
+				action.moveToElement(recipe_Title).click().perform();
+				}
+				
 				WebElement recipeTitlehead = driver
 						.findElement(By.xpath("//div[@id='recipehead']//h1//span[@itemprop='name']"));
 				String title = recipeTitlehead.getText();
