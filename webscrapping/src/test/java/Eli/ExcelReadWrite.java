@@ -1,14 +1,18 @@
-package testCases;
+package Eli;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -20,6 +24,7 @@ public class ExcelReadWrite {
 			public static XSSFWorkbook workbook;
 			public static XSSFSheet sheet;
 			public static XSSFRow row;
+			
 			public static XSSFCell cell;
 			public CellStyle style;
 			String path;
@@ -196,6 +201,33 @@ public class ExcelReadWrite {
 				fileoutput.close();
 			 }
 
-			
+/*			 public void writeDataToExcel(List<LinkedHashMap<String, String>> scrapedData, String SheetName) throws IOException {
+					
+				 workbook=new XSSFWorkbook();	
+				sheet= workbook.createSheet(SheetName);
+				
+				int rowIndex=0;
+				int columnHeader=0;
+				row=sheet.createRow(rowIndex++);
+				for(Map.Entry<String, String> eachMapItem: scrapedData.get(0).entrySet())
+				{
+				cell=row.createCell(columnHeader++);
+				cell.setCellValue(eachMapItem.getKey());
+				}
+				
+				for(LinkedHashMap<String, String> map: scrapedData) {
+					row=sheet.createRow(rowIndex++);
+					int indexColumn=0;
+					for(Map.Entry<String, String> eachMapItem: map.entrySet())
+					{
+					cell=row.createCell(indexColumn++);
+					cell.setCellValue(eachMapItem.getValue());
+					}
+				}
+				FileOutputStream fileOutputStream = new FileOutputStream(new File("C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\Eliminated_List2.xlsx"));
+				workbook.write(fileOutputStream);	
+				}
+*/			 
 	
+				
 }

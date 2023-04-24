@@ -1,4 +1,5 @@
 package testCases;
+import java.awt.AWTException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class JainDiabetic extends BaseClass{
 	//public static WebDriver driver;
 	// ***************************************  CLASS LEVEL VARIABLES	***********************************
 		List<WebElement> recipeTitle ;
-		String eachRecipeTitle;
+		String eachRecipeNutri;
 		List<WebElement> recipeCookingTime ;
 		String eachRecipecookTime;
 		List<WebElement> recipeID ;
@@ -25,6 +26,9 @@ public class JainDiabetic extends BaseClass{
 		String eachRecipeMethod;
 		List<WebElement> recipeNutrition ;
 		String eachRecipeNutrition;
+		List<WebElement> recipeIngredients ;
+		String eachRecipeIng;
+		String nutri;
 		
 	//  ********************************** LAUNCH BROWSER AND OPEN PAGE  ********************************** 	
 		@Test(priority=1)
@@ -34,49 +38,66 @@ public class JainDiabetic extends BaseClass{
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			
 			WebElement search=driver.findElement(By.xpath("//div[@id='search']/input[@id='ctl00_txtsearch']"));
-			search.sendKeys("Jain diabetic"+Keys.ENTER);
+			search.sendKeys("Jain Diabetic"+Keys.ENTER);
 		}
 
 	// *******************   READING AND WRITING DATA INTO EXCEL 	***************************
 			@Test(priority=2)
-			public void readFromExcel() throws InvalidFormatException, IOException, InterruptedException {
-				List<String> recipeTitleList = new ArrayList<String>();
+			public void readFromExcel() throws InvalidFormatException, IOException, InterruptedException, AWTException {
 				List<String> recipeIDList = new ArrayList<String>();
-				List<String> recipeTimeList = new ArrayList<String>();
-				List<String> recipeMethodList = new ArrayList<String>();
-				List<String> recipeNutritionList = new ArrayList<String>();
-			ConfigReader readConfig=new ConfigReader();
-			//String Excelpath = readConfig.getexcelfilepath();
-			String Excelpath="C:\\Users\\Reka\\Downloads\\Telegram Desktop\\Eliminated_List.xlsx";
-			//ExcelReader reader = new ExcelReader( );
-			ExcelReadWrite reader = new ExcelReadWrite(Excelpath );
+				List<String> recipeIngredientList = new ArrayList<String>();
+				//ArrayList<String> eliminatedArray = new ArrayList<>();
+				List<String> eliminatedArray = new ArrayList<String>();
+				List<String> filteredKeywords = new ArrayList<String>();
+				List<String> allergyArray = new ArrayList<String>();
+				//String Excelpath = readConfig.getexcelfilepath();
+				String Excelpath="C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\DDT.xlsx";
+				//ExcelReader reader = new ExcelReader( );
+				ExcelReadWrite reader = new ExcelReadWrite(Excelpath );
 			
-	// ****************************  READ DATA **************************************		
-			String diabetes=reader.getCellData("Sheet1", 0, 0);  
+	// ****************************  READ DIABETES DATA **************************************		
+/*			String diabetes=reader.getCellData("Sheet1", 0, 0);  
 			int rowSize=reader.getRowCount("Sheet1");
 			System.out.println(" row size "+ rowSize);
 			System.out.println("Reading excel ");  
 
 			for(int i=1;i<=rowSize;i++) 
 			{
-			String data=reader.getCellData("Sheet1", i, 0);
-				System.out.println(data);	
+			String diabetes_data=reader.getCellData("Sheet1", i, 0);
+				System.out.println(diabetes_data);
+				eliminatedArray.add(diabetes_data);  ///*******************
 			}	
+*/			
+	// ************************ READ ALLERGY DATA ***************************
+/*			String allergy =reader.getCellData("Sheet1", 0, 4);  
+			int allergySize=reader.getRowCount("Sheet1");
+			System.out.println(" row size "+ allergySize);
+			System.out.println("Reading excel ");  
 
+			for(int i=1;i<=allergySize;i++) 
+			{
+			String allergy_data=reader.getCellData("Sheet1", i, 4);
+				System.out.println(allergy_data);
+				allergyArray.add(allergy_data);  ///*******************
+			}	
+*/
 	//  ************************ CREATE EXCEL SHEET  WITH COLUMN HEADING ***************
-			 reader.setCellData("Sheet4", 0, 0, "Title");
-			 reader.setCellData("Sheet4", 0, 1, "RecipeCookTime");
-			 reader.setCellData("Sheet4", 0, 0, "url");
-			 reader.setCellData("Sheet4", 0, 1, "Title");
-			 reader.setCellData("Sheet4", 0, 2, "RecipeCookTime");
-			 reader.setCellData("Sheet4", 0, 3, "RecipePrepTime");
-			 reader.setCellData("Sheet4", 0, 4, "method");
-			 reader.setCellData("Sheet4", 0, 5, "pagetitle");
-			 reader.setCellData("Sheet4", 0, 6, "nutritionValues");
-			 reader.setCellData("Sheet4", 0, 7, "MorbidCndition");
+			 reader.setCellData("Sheet4", 0, 0, "Recipe ID"); 
+			 reader.setCellData("Sheet4", 0, 1, "Recipe Name");
+			 reader.setCellData("Sheet4", 0, 2, "Page Title");
+			 reader.setCellData("Sheet4", 0, 3, "Vegan Diabetic Food Category");
+			 reader.setCellData("Sheet4", 0, 4, "Ingredients");
+			 reader.setCellData("Sheet4", 0, 5, "RecipePrepTime");
+			 reader.setCellData("Sheet4", 0, 6, "RecipeCookTime");
+			 reader.setCellData("Sheet4", 0, 7, "Preparation Method");
+			 reader.setCellData("Sheet4", 0, 8, "Nutrient values");
+			 reader.setCellData("Sheet4", 0, 9, "Targetted morbid conditions (Diabeties/Hypertension/Hypothyroidism)");
+			 reader.setCellData("Sheet4", 0, 10, "Recipe URL");
+
 			 	 
 	// *******************  PAGINATION SIZE AND ROW SIZE ****************************		
-			List<WebElement> pagination = driver.findElements(By.xpath("//div[@id='maincontent']//div[2]//a[@class='respglink']"));
+			//List<WebElement> pagination = driver.findElements(By.xpath("//div[@id='maincontent']//div[2]//a[@class='respglink']"));
+			List<WebElement> pagination=driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
 			int pgSize = pagination.size();
 			System.out.println(" pagination size = " + pgSize);
 			
@@ -86,21 +107,30 @@ public class JainDiabetic extends BaseClass{
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			
 	// ********************  NAVIGATING THROUGH EACH PAGE AND IN EACH PAGE CLICK RECIPE AND GET ALL DETAILS ***********
-				for (int j = 1; j <= pgSize; j++) 
+	
+			for (int j = 1; j <= pgSize; j++) 
 				{
-					//  if (j >1) {
+						  if (j >1) {
 						//Thread.sleep(2000);
 						//WebElement pagei = driver.findElement(By.xpath("//div[@id='maincontent']//div[2]//a[@class='respglink' and text()='"+j+"']"));
 	//   ********************************* CLICK EACH PAGE ******************************					
 					    Thread.sleep(1000);   
-						WebElement pagei = driver.findElement(By.xpath("//*[@id='cardholder']/div[2]/a['"+j+"']"));
+						//WebElement pagei = driver.findElement(By.xpath("//*[@id='cardholder']/div[2]/a['"+j+"']"));
+					    WebElement pagei = driver.findElement(By.xpath("//*[@id='cardholder']/div[2]/a"));
 						pagei.click();
+						
+//						recipeID = driver.findElements(By.xpath("//div[@id='maincontent']//div[@class='rcc_recipecard']['+j+']"));
+//						for (WebElement eachRecipeID : recipeID) {
+//							recipeIDList.add(eachRecipeID.getAttribute("id"));			
+//						}
+						
 	// *********************** RETRIEVE DATA FOR EACH RECIPE IN EACH PAGE ************************************					
 						for(int r=1;r<=noOfRecipePerPage;r++)  
 						{
 						Thread.sleep(500);
 						js.executeScript("window.scrollBy(0,250)", "");
-						WebElement recipeTitle=driver.findElement(By.xpath("//div[@id='maincontent']//span[@class='rcc_recipename']["+r+"]"));  //['+j+']   ['"+r+"']  '"+j+"'
+						//WebElement recipeTitle=driver.findElement(By.xpath("//div[@id='maincontent']//span[@class='rcc_recipename']["+r+"]"));  //['+j+']   ['"+r+"']  '"+j+"'
+						WebElement recipeTitle=driver.findElement(By.xpath("/html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[2]/div["+r+"]/div[3]/span[1]/a"));
 						recipeTitle.click();
 						
 						//js.executeScript("arguments[0].click()", recipeTitle);
@@ -120,47 +150,65 @@ public class JainDiabetic extends BaseClass{
 						WebElement prepTime = driver.findElement(By.xpath("//div[@id='maincontent']//*[@id='ctl00_cntrightpanel_pnlRecipeScale']/section/p[2]/time[@itemprop='cookTime']"));			
 						String prep_time=prepTime.getText();
 						
-						
 						WebElement morbidCondition  = driver.findElement(By.xpath("//img[@src='images/recipe/diabetic.gif']"));
-						String morbid_condition=morbidCondition.getText();
+						String morbid_condition=morbidCondition.getAttribute("src");
 						
-						WebElement recipeMethod = driver.findElement(By.xpath("//ol[@itemprop='recipeInstructions']/li/span	")); //ol[@itemprop=\"recipeInstructions\"]/li/span								
+						WebElement recipeMethod = driver.findElement(By.xpath("//*[@id='ctl00_cntrightpanel_pnlRcpMethod']")); 								
 						String method=recipeMethod.getText();
 						
-						int rowsize=driver.findElements(By.xpath("//table[@id='rcpnutrients']//tr")).size();
-						System.out.println(rowsize);
-						for(int i=1;i<=rowsize;i++) 
+//						WebElement recipeCategory = driver.findElement(By.xpath("//*[@id='recipe_tags']/a[5]/span"));
+//						String RecpieCategory=recipeCategory.getText();
+						
+						WebElement recipeNutrition = driver.findElement(By.xpath("//div[@id=\"accompaniments\"]"));
+						String Nutritionlist=recipeNutrition.getText();
+						
+						int Ingredientssize = driver.findElements(By.xpath("//*[@id='rcpinglist']/div/span")).size();
+						System.out.println(Ingredientssize);
+						for(int l=1;l<=Ingredientssize;l++) 
 						{
-						recipeNutrition =driver.findElements(By.xpath("//table[@id='rcpnutrients']//tr['+i+']"));
-						for (WebElement eachNutrition : recipeNutrition)
-						{
-						recipeNutritionList.add(eachNutrition.getText());
+							recipeIngredients = driver.findElements(By.xpath("//*[@id='rcpinglist']/div/span['+i+']"));
+							for (WebElement eachIngredient : recipeIngredients)
+							{
+							recipeIngredientList.add(eachIngredient.getText());
+							}
 						}
-						}
+						
+						WebElement ingredients= driver.findElement(By.xpath("//*[@id='rcpinglist']"));
+						String RecpieIngredients=ingredients.getText(); 
+						
 						driver.navigate().back();
 						//Thread.sleep(1000);
 						
-//   *************** WRITING DATA INTO EXCEL ***********************************		
-						//js.executeScript("arguments[0].click()", recipeTitle);
-						reader.setCellData("Sheet4", r, 0, url);
-						reader.setCellData("Sheet4", r, 1, title);
-						reader.setCellData("Sheet4", r, 2, cook_time);
-						reader.setCellData("Sheet4", r, 3, prep_time);
-						reader.setCellData("Sheet4", r, 4, method);
-						reader.setCellData("Sheet4", r, 5, pageTiltle);	
-						reader.setCellData("Sheet4", r, 7, morbid_condition);	
-					
-				int i=1;
-	 			 for (String eachRecipeNutritionList : recipeNutritionList ) {
-	 				eachRecipeTitle=eachRecipeNutritionList;
-	 				 // writing the data in excel sheet	
-	 				reader.setCellData("Sheet4", i, 6, eachRecipeTitle);
-	 				i++;
-	 				System.out.println(eachRecipeNutritionList);
-	 				eachRecipeTitle=null;
-	 			 		}
-	 			 
+//	    *************** WRITING DATA INTO EXCEL ***********************************		
+						//js.executeScript("arguments[0].click()", recipeTitle);			
+						reader.setCellData("Sheet7", r, 1, title);
+						reader.setCellData("Sheet7", r, 2, pageTiltle);				
+						//reader.setCellData("Sheet7", r, 2, RecpieCategory);
+						//reader.setCellData("Sheet7", r, 3, FoodCategory);
+						reader.setCellData("Sheet7", r, 4,RecpieIngredients );
+						reader.setCellData("Sheet7", r, 5, prep_time);
+						reader.setCellData("Sheet7", r, 6, cook_time);
+						reader.setCellData("Sheet7", r, 7, method);
+						reader.setCellData("Sheet7", r, 8,Nutritionlist);
+						reader.setCellData("Sheet7", r, 9, morbid_condition);
+						reader.setCellData("Sheet7", r, 10, url);
+				 
+				 int k=1;
+				 for (String eachIDList : recipeIDList ) {
+					 eachRecipeID=eachIDList;
+					 // writing the data in excel sheet	
+					reader.setCellData("Sheet7", k, 0, eachRecipeID);
+					k++;
+					System.out.println(eachIDList);
+					eachRecipeID=null;
+				 }
+			
+				 //if(recipeIngredientList != eliminatedArray)
+				 if(recipeIngredientList .equals(eliminatedArray))
+					 //eachRecipeID.
+						  filteredKeywords= recipeIngredientList;		 
+				 			System.out.println((filteredKeywords));  
 					}
-			}
-		}
+				}
+				}}
 }

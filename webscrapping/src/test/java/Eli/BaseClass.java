@@ -1,4 +1,4 @@
-package testCases;
+package Eli;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -10,6 +10,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,12 +18,15 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.ConfigReader;
 import utilities.Loggerload;
+import java.util.HashMap;
 
 public class BaseClass  {
 	public static WebDriver driver;
@@ -49,10 +53,11 @@ public class BaseClass  {
 		chromeOptions.setAcceptInsecureCerts(true);
 //		chromeOptions.setScriptTimeout(Duration.ofSeconds(30));
 //		chromeOptions.setPageLoadTimeout(Duration.ofMillis(30000));
-//      chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
-		//disableChromeImages(options;)
+//      chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));	
 		chromeOptions.addArguments("--remote-allow-origins=*");	  
-		driver =new ChromeDriver(chromeOptions);			
+		//driver =new ChromeDriver(chromeOptions);	
+		disableChromeImages(chromeOptions);
+		driver = WebDriverManager.chromedriver().capabilities(chromeOptions).create();
 		}
 		
 		else if(br.equalsIgnoreCase("firefox")){
@@ -61,9 +66,9 @@ public class BaseClass  {
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 			firefoxOptions.setAcceptInsecureCerts(true);
-			firefoxOptions.setScriptTimeout(Duration.ofSeconds(30));
-			firefoxOptions.setPageLoadTimeout(Duration.ofMillis(30000));
-			firefoxOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));			  
+//			firefoxOptions.setScriptTimeout(Duration.ofSeconds(30));
+//			firefoxOptions.setPageLoadTimeout(Duration.ofMillis(30000));
+//			firefoxOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));			  
 			driver =new FirefoxDriver(firefoxOptions);				
 		}
 		 
@@ -97,6 +102,19 @@ public class BaseClass  {
 		//FileUtils.copyFile(sourceFile3, destinationFile3); 
 		FileHandler.copy(sourceFile, destinationFile);
 		System.out.println("Screenshot Taken");
-	}	
+	}
+	public void WaitForElement(WebElement element) {
+		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(element));
+
+	}
+	
+	 public static ChromeOptions disableChromeImages(ChromeOptions options) {
+		  HashMap<String,Object> imagesMap=new HashMap<String,Object>();
+		  imagesMap.put("images", 2);
+		  HashMap<String,Object> prefsMap=new HashMap<String,Object>();
+		  prefsMap.put("profile.default_content_setting_values", imagesMap);
+		  options.setExperimentalOption("prefs", prefsMap);
+		  return options;
+		 }  
 }
 

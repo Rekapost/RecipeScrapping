@@ -4,13 +4,13 @@
   <test thread-count="4" name="ChromeTest(failed)" parallel="tests">
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="testCases.VeganDiabeticWebScrapping">
+      <class name="Eli.Sample_DDT">
         <methods>
           <include name="setup"/>
           <include name="tearDown"/>
-          <include name="readFromExcel"/>
+          <include name="loginWithInput" invocation-numbers="0 1 2 3"/>
         </methods>
-      </class> <!-- testCases.VeganDiabeticWebScrapping -->
+      </class> <!-- Eli.Sample_DDT -->
     </classes>
   </test> <!-- ChromeTest(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

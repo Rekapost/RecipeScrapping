@@ -3,9 +3,18 @@
 <suite name="TestSuite" thread-count="4" parallel="tests" >
    <test name="ChromeTest">
 			<parameter name="browser" value="chrome" />
-    <classes>     
-        <class name="testCases.VeganDiabeticWebScrapping"/>
-      <!--  <class name="testCases.JainDiabetic"/>  -->
+			
+    <classes>  
+       
+         <!--     <class name="testCases.VeganDiabeticWebScrapping"/>  -->
+                     
+     <!--  <class name="Eli.HypothyroidTestCase"/>            -->
+     <!--  <class name="Eli.PCOS_TestCase"/>             -->
+     <!--  <class name="Eli.HypertensionTestCase"/>      -->    
+     <!--  <class name="testCases.DDT"/>                 -->   
+    <class name="Eli.Sample_DDT"/>               
+     
     </classes>
+    
   </test> <!-- Test -->
 </suite> <!-- Suite -->
