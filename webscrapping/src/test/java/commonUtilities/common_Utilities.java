@@ -21,15 +21,18 @@ public class common_Utilities {
 		return false;
 	}
 
-	public boolean hasAllergyLists(List<String> allergyItems, String recipeIngredients) {
+	public boolean hasAllergyOrRecommendedLists(List<String> allergyItems, String recipeIngredients) {
+		//System.out.println("pass item "+recipeIngredients);
 		for (String avoiditem : allergyItems) {
-			if (recipeIngredients.contains(avoiditem.toUpperCase())) {
+			//System.out.println("aleer"+avoiditem);
+			if (recipeIngredients.contains(avoiditem.toLowerCase())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	
 	public boolean hasToAddLists(List<String> ToAddItems, String recipeIngredients) {
 		for (String avoiditem : ToAddItems) {
 			if (recipeIngredients.contains(avoiditem.toUpperCase())) {

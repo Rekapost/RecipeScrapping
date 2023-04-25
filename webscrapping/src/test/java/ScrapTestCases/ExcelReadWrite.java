@@ -146,37 +146,85 @@ public class ExcelReadWrite {
 				fileoutput.close();
 			 }
 			 
-			 public void fillRedColor(String sheetName, int rownum,int column,String value) throws IOException
-			 {
-				fileinput=new FileInputStream("C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_final.xlsx");
-
-				workbook=new XSSFWorkbook(fileinput);
-				sheet=workbook.getSheet(sheetName);
-//				row=sheet.getRow(rownum);
-				
-				row = sheet.getRow(rownum);
-				if (row == null) row = sheet.createRow(rownum++);
-				System.out.println("rownum"+rownum);
-				cell=row.getCell(column);
-		        cell = row.createCell(8);
-		        cell.setCellValue(value);
-
-//		      cell.setCellValue(data);
-				
-	        	 String filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\allergy_diabetic.xlsx";
-	        	 FileOutputStream  fileoutput = new FileOutputStream(filename);
-				
-				style=workbook.createCellStyle();				
-				style.setFillForegroundColor(IndexedColors.RED.getIndex());
-				style.setFillPattern(FillPatternType.SOLID_FOREGROUND);				
-				cell.setCellStyle(style);
-
-				workbook.write(fileoutput);
-				workbook.close();
-				fileinput.close();
-				fileoutput.close();
-				
-			 }
+			 FileOutputStream fo;
+			 FileInputStream fi;
+			 //XSSFCellStyle cellStyle;
+			 public void setCellData(String sheetName,int rowNum,int colNum,
+			 				String data,boolean allergeFound) throws IOException {
+			 			File xlFile = new File(path);
+			 			// if file not exists then create a new file
+			 			if (!xlFile.exists()) {         
+			 			workbook = new XSSFWorkbook();
+			 			fo = new FileOutputStream(path);
+			 			workbook.write(fo);
+			 			}
+			 			fi = new FileInputStream(path);
+			 			workbook = new XSSFWorkbook(fi);
+			 			// if Sheet not exists then create a new sheet
+			 			if (workbook.getSheetIndex(sheetName) == -1) {
+			 				workbook.createSheet(sheetName);
+			 			}
+			 			sheet = workbook.getSheet(sheetName);
+			 			// if row not exists then create a new row
+			 			if (sheet.getRow(rowNum) == null) {
+			 				sheet.createRow(rowNum);
+			 			}
+			 			row = sheet.getRow(rowNum);
+			 		    cell = row.createCell(colNum);
+			 			cell.setCellValue(data);
+			 			fo = new FileOutputStream(path);
+			 			//style=workbook.createCellStyle();
+			 			if(allergeFound) {
+			 				style = workbook.createCellStyle();
+			 				style.setFillForegroundColor(IndexedColors.RED.getIndex());
+			 				style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			 				 cell.setCellStyle(style);
+			 			} else {
+			 				style = workbook.createCellStyle();
+			 				style.setFillForegroundColor(IndexedColors.SEA_GREEN.getIndex());
+			 				style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			 				 cell.setCellStyle(style);
+			 			}
+			 			workbook.write(fo);
+			 			workbook.close();
+			 			fi.close();
+			 			fo.close();
+			 			}
+			 
+//			 public void fillRedColor(String sheetName, int rownum,int column,String value,FileOutputStream fileinput) throws IOException
+//			 {
+//				//fileinput=new FileInputStream("C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\Diabetic_Eliminated_Passed_Recipe.xlsx");
+////
+////				workbook=new XSSFWorkbook(fileinput);
+////				sheet=workbook.getSheet(sheetName);
+//////				row=sheet.getRow(rownum); --
+////				
+////				row = sheet.getRow(rownum);
+////				if (row == null) row = sheet.createRow(rownum++);
+////				System.out.println("rownum"+rownum);
+////				cell=row.getCell(column);
+////		        cell = row.createCell(8);
+////		        cell.setCellValue(value);
+////
+//////		      cell.setCellValue(data); --
+////				
+////	        	 String filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\allergy_diabetic.xlsx";
+////	        	 FileOutputStream  fileoutput = new FileOutputStream(filename);
+//				
+//				 FileOutputStream
+//				style=workbook.createCellStyle();				
+//				style.setFillForegroundColor(IndexedColors.RED.getIndex());
+//				style.setFillPattern(FillPatternType.SOLID_FOREGROUND);				
+//				cell.setCellStyle(style);
+//
+//				workbook.write(fileoutput);
+//				workbook.close();
+//				//fileinput.close();
+//				fileoutput.close();
+//				
+//			 }
+			 
+			 
 	 
 			 public void setCellDataColouring(String sheetName,int rowNum,int colNum,
 				      String data,boolean allergeFound) throws IOException {

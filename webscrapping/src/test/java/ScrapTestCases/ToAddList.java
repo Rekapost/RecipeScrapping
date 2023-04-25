@@ -18,7 +18,7 @@ public class ToAddList {
 		int d;
 		
 		@Test
-		public void allergy() throws IOException {
+		public List<String> getAddList() throws IOException {
 
 		        // reading diabetes allergy  eliminated list
 			    reader = new ExcelReadWrite(path);
@@ -32,35 +32,40 @@ public class ToAddList {
 //					System.out.println(diabetes_data);
 					to_AddList.add(toAdd_data); 
 //					System.out.println(diabetes_data);
+
 				}
-				
-							// reading  filtered Recpies list
-				            reader = new ExcelReadWrite(finalpath);
-							//String filtered = reader.getCellData("filtered_Recp", 0, 0);
-							int fil_RecpSize = reader.getRowCount("filtered_Recp");
-							System.out.println(" row size " + fil_RecpSize);
-							System.out.println("Reading excel ");
-							filterList = new ArrayList<String>();
-							for ( d = 1; d <= fil_RecpSize; d++) {
-								ToAdddata = reader.getCellData("filtered_Recp", d, 2);
-								boolean isContainAllergyItems = common.hasToAddLists(to_AddList, ToAdddata);
 								
-//								reader.setCellDataColouring("filtered_Recp",d,2,"allergy item",isContainAllergyItems);
-								
-								if(isContainAllergyItems) {
-									System.out.println(" Recipe is not recomeneded as it has Ingredients from allergy List");
-									reader.fillRedColor("filtered_Recp", d, 8,"allergy item");
-									System.out.println(d);
-								}			
-								else {
-									System.out.println("Not an allergy item");
-									reader.fillRedColor("filtered_Recp", d, 8,"Not an allergy item");
-									System.out.println(d);
-								}							
-//								System.out.println(filter_data);
-					}						
-	     	}										
-								
+			return to_AddList;
+		}
+					
+					
+/*							// reading  filtered Recpies list
+//				            reader = new ExcelReadWrite(finalpath);
+//							//String filtered = reader.getCellData("filtered_Recp", 0, 0);
+//							int fil_RecpSize = reader.getRowCount("filtered_Recp");
+//							System.out.println(" row size " + fil_RecpSize);
+//							System.out.println("Reading excel ");
+//							filterList = new ArrayList<String>();
+//							for ( d = 1; d <= fil_RecpSize; d++) {
+//								ToAdddata = reader.getCellData("filtered_Recp", d, 2);
+//								boolean isContainAllergyItems = common.hasToAddLists(to_AddList, ToAdddata);
+//								
+////								reader.setCellDataColouring("filtered_Recp",d,2,"allergy item",isContainAllergyItems);
+//								
+//								if(isContainAllergyItems) {
+//									System.out.println(" Recipe is not recomeneded as it has Ingredients from allergy List");
+//									//reader.fillRedColor("filtered_Recp", d, 8,"allergy item");
+//									System.out.println(d);
+//								}			
+//								else {
+//									System.out.println("Not an allergy item");
+//									//reader.fillRedColor("filtered_Recp", d, 8,"Not an allergy item");
+//									System.out.println(d);
+//								}							
+////								System.out.println(filter_data);
+//					}						
+//	     	}										
+	*/							
 	/*							
 								filterList.add(ToAdddata); 
 								System.out.println(ToAdddata);
