@@ -111,8 +111,8 @@ public class PCOS_TestCase extends BaseClass{
 			e.printStackTrace();
 		}
 		Thread.sleep(1000);
-		if (searchinput.equalsIgnoreCase("Vegan PCOS")) {
-			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
+		if (searchinput.equalsIgnoreCase("PCOS Indian")) {
+			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[4]/a"));
 			pgSize = pagelist.size();
 			System.out.println(" page size no:" + pagelist.size());
 		}
@@ -146,7 +146,7 @@ public class PCOS_TestCase extends BaseClass{
 		for (int x = 1; x <= pgSize; x++) {
 			System.out.println("test1first");
 			if (x > 1) {
-				if (searchinput.equalsIgnoreCase("Vegan PCOS")) {
+				if (searchinput.equalsIgnoreCase("PCOS Indian")) {
 
 					WebElement pageNum = driver.findElement(By.xpath("//*[@id='cardholder']/div[4]/a[" + x + "]"));
 					String pagNumber = pageNum.getText();
@@ -208,8 +208,8 @@ public class PCOS_TestCase extends BaseClass{
 				String recipeName = recipNam.getText();
 				System.out.println("\t*******");
 				System.out.println("Recipe Name : " + recipeName);
-				recipNam.click();
-
+				//recipNam.click();
+                WaitForElement(recipNam);
 				Thread.sleep(1000);
 //				js.executeScript("window.scrollBy(0,250)", "");
 //				Thread.sleep(1000);
@@ -282,9 +282,9 @@ public class PCOS_TestCase extends BaseClass{
 					String[] recipeData = { recipe_id, reciepename, title, RecpieIngredients, prep_time, cook_time,
 							method, Nutritionlist, url };
 					scrapedData.add(recipeData);
-					if (searchinput.equalsIgnoreCase("PCOS lunch")) {
+					if (searchinput.equalsIgnoreCase("PCOS Indian")) {
 						try {
-							common.writeDataToExcel(scrapedData, "PCOS lunch", searchinput);
+							common.writeDataToExcel(scrapedData, "PCOS Indian", searchinput);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -304,17 +304,8 @@ public class PCOS_TestCase extends BaseClass{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (searchinput.equalsIgnoreCase("PCOS High Fibre")) {
-						try {
-							common.writeDataToExcel(scrapedData, "PCOS High Fibre", searchinput);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} else if (searchinput.equalsIgnoreCase("PCOS Weight Loss")) {
+					} 
+					else if (searchinput.equalsIgnoreCase("PCOS Weight Loss")) {
 						try {
 							common.writeDataToExcel(scrapedData, "PCOS Weight Loss", searchinput);
 						} catch (IOException e) {
@@ -325,33 +316,7 @@ public class PCOS_TestCase extends BaseClass{
 							e.printStackTrace();
 						}
 					} 
-						
-						else if (searchinput.equalsIgnoreCase("PCOS Indian")) {
-							
-							try {
-								common.writeDataToExcel(scrapedData, "PCOS Indian", searchinput);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-						}
-							else if (searchinput.equalsIgnoreCase("PCOS recipes")) {
-							
-							try {
-								common.writeDataToExcel(scrapedData, "PCOS_recipes", searchinput);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-						}
+									
 					else {
 						System.out.println("No input located");
 					}

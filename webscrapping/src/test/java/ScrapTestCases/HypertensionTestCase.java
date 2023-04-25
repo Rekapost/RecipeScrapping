@@ -12,7 +12,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import commonUtilities.common_Utilities;
 
-public class HypertensionTestCase extends BaseClass{
+public class HypertensionTestCase extends BaseClass {
 	List<WebElement> recipeTitle;
 	String eachRecipeNutri;
 	List<WebElement> recipeCookingTime;
@@ -44,6 +44,8 @@ public class HypertensionTestCase extends BaseClass{
 	int row_Size;
 	common_Utilities common = new common_Utilities();
 
+	// ****************** Using Data Provider to run single testcase with multiple
+	// set of data *******************
 	@DataProvider(name = "inputData")
 	public String[][] getExcelData() throws IOException {
 		String path = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\Hypertension_Input.xlsx";
@@ -62,6 +64,7 @@ public class HypertensionTestCase extends BaseClass{
 		return dataTable;
 	}
 
+	// *********************** Launching browser and opening **********************
 	@Test(dataProvider = "inputData") // (String searchinput)
 	public void searchWithInput(String p, String searchinput) throws IOException, InterruptedException {
 		List<String[]> scrapedData = new ArrayList<String[]>();
@@ -85,8 +88,8 @@ public class HypertensionTestCase extends BaseClass{
 		System.out.println(" row size " + rowSize);
 		System.out.println("Reading excel ");
 		Thread.sleep(1000);
-		
-// reading diabetes eliminated list		
+
+// ******************************reading hypertension eliminated list		
 		String Hypertension = reader.getCellData("hypertension_eliminated", 0, 0);
 		int hypoRowSize = reader.getRowCount("hypertension_eliminated");
 		System.out.println(" row size " + hypoRowSize);
@@ -94,13 +97,12 @@ public class HypertensionTestCase extends BaseClass{
 
 		for (int d = 1; d <= hypoRowSize; d++) {
 			String Hypertension_data = reader.getCellData("hypertension_eliminated", d, 0);
-			
+
 			Hypertension_eli_List.add(Hypertension_data);
-			
-/// *******************
 		}
 		System.out.println("search input " + searchinput);
-//*******************
+
+//******************* Passing input and opening URL 
 		try {
 			current_url = "https://www.tarladalal.com/RecipeSearch.aspx?rec=1&term" + "=" + searchinput;
 			driver.get(current_url);
@@ -114,16 +116,18 @@ public class HypertensionTestCase extends BaseClass{
 		if (searchinput.equalsIgnoreCase("Vegan Hypertension")) {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
 			pgSize = pagelist.size();
+			System.out.println(" Insides Hypertension recipes");
 			System.out.println(" page size no:" + pagelist.size());
 		}
 
 		else {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[3]/a"));
 			pgSize = pagelist.size();
+			System.out.println(" Inside Hypertension recipes");
 			System.out.println(" page size no:" + pagelist.size());
 		}
 
-
+// ************** Getting Recipes count 
 		int noOfRecipePerPage1 = driver.findElements(By.xpath("//div[@id='maincontent']//div[@class='rcc_recipecard']"))
 				.size();
 		System.out.println("No.of Rows in a page:" + noOfRecipePerPage1);
@@ -143,6 +147,8 @@ public class HypertensionTestCase extends BaseClass{
 		}
 //						 r=1;	i=1;
 //						 for ( r = 1; r <= noOfRecipePerPage; r++)  {
+
+//****************** Navigation and working on pagination 		
 		for (int x = 1; x <= pgSize; x++) {
 			System.out.println("test1first");
 			if (x > 1) {
@@ -150,7 +156,8 @@ public class HypertensionTestCase extends BaseClass{
 
 					WebElement pageNum = driver.findElement(By.xpath("//*[@id='cardholder']/div[2]/a[" + x + "]"));
 					String pagNumber = pageNum.getText();
-					pageNum.click();
+					WaitForElement(pageNum);
+					//pageNum.click();
 					System.out.println("Page Number : " + pagNumber);
 					lstReceipes = driver.findElements(By.xpath("html/body//div[@class='rcc_recipecard']"));
 					row_Size = lstReceipes.size();
@@ -166,7 +173,8 @@ public class HypertensionTestCase extends BaseClass{
 				} else {
 					WebElement pageNum = driver.findElement(By.xpath("//*[@id='cardholder']/div[3]/a[" + x + "]"));
 					String pagNumber = pageNum.getText();
-					pageNum.click();
+					WaitForElement(pageNum);
+					//pageNum.click();
 					System.out.println("Page Number : " + pagNumber);
 					lstReceipes = driver.findElements(By.xpath("html/body//div[@class='rcc_recipecard']"));
 					row_Size = lstReceipes.size();
@@ -179,6 +187,7 @@ public class HypertensionTestCase extends BaseClass{
 				}
 			}
 
+// ********************* Iterating through each recipe  and getting Name and ingredients 
 //			r = 1;
 			for (int r = 0; r < row_Size;) {
 				System.out.println("test3first");
@@ -208,7 +217,8 @@ public class HypertensionTestCase extends BaseClass{
 				String recipeName = recipNam.getText();
 				System.out.println("\t*******");
 				System.out.println("Recipe Name : " + recipeName);
-				recipNam.click();
+				WaitForElement(recipNam);
+				//recipNam.click();
 
 				Thread.sleep(1000);
 //				js.executeScript("window.scrollBy(0,250)", "");
@@ -217,6 +227,7 @@ public class HypertensionTestCase extends BaseClass{
 				WebElement ingredients = driver.findElement(By.xpath("//*[@id='rcpinglist']"));
 				String RecpieIngredients = ingredients.getText();
 
+// ************ Checking for ingredients in elimination list  and if pass , get the details of each recipe 
 				boolean isContainEliminatedItems = common.hasEliminatedLists(Hypertension_eli_List, RecpieIngredients);
 
 				if (isContainEliminatedItems) {
@@ -279,6 +290,8 @@ public class HypertensionTestCase extends BaseClass{
 					driver.navigate().back();
 //				// Thread.sleep(1000);
 
+//****************************  storing all data and printing in excel s
+
 					String[] recipeData = { recipe_id, reciepename, title, RecpieIngredients, prep_time, cook_time,
 							method, Nutritionlist, url };
 					scrapedData.add(recipeData);
@@ -324,21 +337,8 @@ public class HypertensionTestCase extends BaseClass{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} 
-						
-						else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
-							
-							try {
-								common.writeDataToExcel(scrapedData, "Hypertension_recipes", searchinput);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-						}
+					}
+
 					else {
 						System.out.println("No input located");
 					}

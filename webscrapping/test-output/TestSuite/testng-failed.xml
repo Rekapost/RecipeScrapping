@@ -6,7 +6,7 @@
     <classes>
       <class name="ScrapTestCases.HypothyroidTestCase">
         <methods>
-          <include name="searchWithInput" invocation-numbers="0 1 2 3 4 5"/>
+          <include name="searchWithInput" invocation-numbers="0 1 2 3 4"/>
           <include name="setup"/>
           <include name="tearDown"/>
         </methods>

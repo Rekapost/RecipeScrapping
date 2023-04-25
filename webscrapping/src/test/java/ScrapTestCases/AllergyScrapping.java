@@ -12,8 +12,8 @@ public class AllergyScrapping {
 	List<String> allergyList;
 	List<String> filterList;
 	List<String> allergyRecipeList;
-	String finalpath = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\recipes_final.xlsx";
-	String path = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\Diabetic_Input.xlsx";
+	String finalpath = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\Diabetic_Eliminated_Passed_Recipe.xlsx";
+	String path = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\Diabetic_Input.xlsx";
 	ExcelReadWrite reader ;
 	ExcelReader read;
 	common_Utilities common = new common_Utilities();
@@ -38,16 +38,15 @@ public class AllergyScrapping {
 				allergyList.add(allergy_data); 
 //				System.out.println(diabetes_data);
 			}
-			
-						// reading  filtered Recpies list
+					// reading  filtered Recpies list
 		            	reader = new ExcelReadWrite(finalpath);
 //						String filtered = reader.getCellData("filtered_Recp", 0, 0);
-						int fil_RecpSize = reader.getRowCount("filtered_Recp");
+						int fil_RecpSize = reader.getRowCount("diabetic");
 						System.out.println(" row size " + fil_RecpSize);
 						System.out.println("Reading excel ");
 						filterList = new ArrayList<String>();						
 			              	for(d = 1; d <= fil_RecpSize; d++) {
-							filter_data = reader.getCellData("filtered_Recp", d, 2);
+							filter_data = reader.getCellData("diabetic", d, 3);
 //							String[] recipeData= {recipe_id, reciepename, title,RecpieIngredients, prep_time,cook_time ,     
 //									 method,Nutritionlist,url};
 //							filterList.add(filter_data); 
@@ -67,6 +66,5 @@ public class AllergyScrapping {
 							}							
 //							System.out.println(filter_data);
 				}						
-     	}	
-		
+     	}			
 }

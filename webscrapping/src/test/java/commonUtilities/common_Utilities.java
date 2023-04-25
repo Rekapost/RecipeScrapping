@@ -95,57 +95,42 @@ public class common_Utilities {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_jain_hypothyroid.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Hypothyroid Lunch")) {
+		else if (searchinput.equalsIgnoreCase("Jain Hypothyroid")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_non_veg_hypothyroid.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Vegetarian Hypothyroid")) {
+		else if (searchinput.equalsIgnoreCase("Non Veg Hypothyroid")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_veg_hypothyroid.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Hypothyroid Recipes")) {
+		else if (searchinput.equalsIgnoreCase("Vegetarian Hypothyroid")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_hypertension.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
 		//////////////////////////////////////////////////////////////////////////
-		/*else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
+		else if (searchinput.equalsIgnoreCase("Vegan Hypertension")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_hypertension.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
+		else if (searchinput.equalsIgnoreCase("Jain Hypertension")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_jain_hypertension.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
+		else if (searchinput.equalsIgnoreCase("Non Veg Hypertension ")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_non_veg_hypertension.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
+		else if (searchinput.equalsIgnoreCase("Vegetarian Hypertension")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_veg_hypertension.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_Vegan_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Hypertension recipes")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-*/
 		////////////////////////////////////////////////////////////////////////////////////////
-		else if (searchinput.equalsIgnoreCase("PCOS lunch")) {
-		filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_lunch.xlsx";
-		outputStream = new FileOutputStream(filename);
-		}
+		
 		else if (searchinput.equalsIgnoreCase("PCOS breakfast")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_breakfast.xlsx";
 			outputStream = new FileOutputStream(filename);
 		}
-		else if (searchinput.equalsIgnoreCase("PCOS High Fibre")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_High Fibre.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
+		
 		else if (searchinput.equalsIgnoreCase("PCOS Weight Loss")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_Weight Loss";
 			outputStream = new FileOutputStream(filename);

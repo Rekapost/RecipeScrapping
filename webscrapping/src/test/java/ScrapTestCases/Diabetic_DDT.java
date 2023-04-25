@@ -118,12 +118,14 @@ public class Diabetic_DDT extends BaseClass {
 		if (searchinput.equalsIgnoreCase("Vegan Diabetic")) {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
 			pgSize = pagelist.size();
+			System.out.println(" Inside Diabetic recipes");
 			System.out.println(" page size no:" + pagelist.size());
 		}
 
 		else {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[3]/a"));
 			pgSize = pagelist.size();
+			System.out.println(" Inside Diabetic recipes");
 			System.out.println(" page size no:" + pagelist.size());
 		}
 
@@ -264,9 +266,16 @@ public class Diabetic_DDT extends BaseClass {
 				String recipeName = recipNam.getText();
 				System.out.println("\t*******");
 				System.out.println("Recipe Name : " + recipeName);
+				//WaitForElement(recipeName);
 				recipNam.click();
 
 //				try {
+				
+				
+				
+				
+				
+				
 //					Thread.sleep(1000);
 //					recipe_Title = driver.findElement(By.xpath(
 //							"//div[@id='maincontent']/div/div[2]/div["+r+"]/div[3]/span[1]/a"));

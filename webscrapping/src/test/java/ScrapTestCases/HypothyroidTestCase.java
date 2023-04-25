@@ -1,4 +1,5 @@
 package ScrapTestCases;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import commonUtilities.common_Utilities;
 
-public class HypothyroidTestCase extends BaseClass{
+public class HypothyroidTestCase extends BaseClass {
 	List<WebElement> recipeTitle;
 	String eachRecipeNutri;
 	List<WebElement> recipeCookingTime;
@@ -113,7 +114,23 @@ public class HypothyroidTestCase extends BaseClass{
 			e.printStackTrace();
 		}
 		Thread.sleep(1000);
-		if (searchinput.equalsIgnoreCase("Jain Hypothyroid")) {
+		if (searchinput.equalsIgnoreCase("Hypothyroid snack")) {
+			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
+			pgSize = pagelist.size();
+			System.out.println(" page size no:" + pagelist.size());
+		}
+//		else  {
+//			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[3]/a"));
+//			pgSize = pagelist.size();
+//			System.out.println(" page size no:" + pagelist.size());
+//		}
+		else if (searchinput.equalsIgnoreCase("Hypothyroid Breakfast")) {
+			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
+			pgSize = pagelist.size();
+			System.out.println(" page size no:" + pagelist.size());
+		}
+		
+		else if (searchinput.equalsIgnoreCase("Jain Hypothyroid")) {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[3]/a"));
 			pgSize = pagelist.size();
 			System.out.println(" page size no:" + pagelist.size());
@@ -126,11 +143,9 @@ public class HypothyroidTestCase extends BaseClass{
 		else if (searchinput.equalsIgnoreCase("Vegetarian Hypothyroid")) {
 			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[3]/a"));
 			pgSize = pagelist.size();
-			System.out.println(" page size no:" + pagelist.size());
 		}
-
 		else {
-			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[2]/a"));
+			List<WebElement> pagelist = driver.findElements(By.xpath("//*[@id='cardholder']/div[3]/a"));
 			pgSize = pagelist.size();
 			System.out.println(" page size no:" + pagelist.size());
 		}
@@ -161,12 +176,12 @@ public class HypothyroidTestCase extends BaseClass{
 		for (int x = 1; x <= pgSize; x++) {
 			System.out.println("test1first");
 			if (x > 1) {
-				if (searchinput.equalsIgnoreCase("Vegan Hypothyroid")) {
+				if ((searchinput.equalsIgnoreCase("Hypothyroid Snack"))||(searchinput.equalsIgnoreCase("Hypothyroid Breakfast"))){
 
 					WebElement pageNum = driver.findElement(By.xpath("//*[@id='cardholder']/div[2]/a[" + x + "]"));
 					String pagNumber = pageNum.getText();
 					pageNum.click();
-					System.out.println("Page Number : " + pagNumber);
+					System.out.println("Pagination inside : " + pagNumber+searchinput);
 					lstReceipes = driver.findElements(By.xpath("html/body//div[@class='rcc_recipecard']"));
 					row_Size = lstReceipes.size();
 					receipeIDList = new ArrayList<>();
@@ -178,7 +193,9 @@ public class HypothyroidTestCase extends BaseClass{
 					nofrec = driver.findElements(By.xpath("//div[@class='rcc_recipecard']"));
 					// div[@id='cardholder']//div[@style='text-align:right;padding-bottom:15px;']/a[@class='respglink']
 					// and text()='"+x+"']
-				} else {
+				
+				} 
+			else {
 					WebElement pageNum = driver.findElement(By.xpath("//*[@id='cardholder']/div[3]/a[" + x + "]"));
 					String pagNumber = pageNum.getText();
 					pageNum.click();
@@ -200,15 +217,18 @@ public class HypothyroidTestCase extends BaseClass{
 				System.out.println("test3first");
 				System.out.println("r value:" + r);
 				System.out.println("No.of Rows in a page:" + noOfRecipePerPage);
+//				if (r==4) {
+//					break;
+//				}
 
 				Thread.sleep(2000);
 				js.executeScript("window.scrollBy(0,250)", "");
 //									we.getTagName()
-				if (r == 8) {
-					js.executeScript("window.scrollBy(0,250)", "");
-					Thread.sleep(2000);
-					r = 9;
-				}
+//				if (r == 8) {
+//					js.executeScript("window.scrollBy(0,250)", "");
+//					Thread.sleep(2000);
+//					r = 9;
+//				}
 
 //				recipe_Title = driver.findElement(By.xpath(
 //						"/html/body/div[2]/form/div[3]/div[2]/div/div[1]/div[2]/div["+r+"]/div[3]/span[1]/a"));
@@ -238,6 +258,7 @@ public class HypothyroidTestCase extends BaseClass{
 				if (isContainEliminatedItems) {
 					System.out.println(" Recipe is not recomeneded as it has Ingredients from Eliminated List");
 					driver.navigate().back();
+					Thread.sleep(1000);
 //					driver.navigate().refresh();
 					r++;
 				} else {
@@ -308,11 +329,10 @@ public class HypothyroidTestCase extends BaseClass{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}
-
-					else if (searchinput.equalsIgnoreCase("Hypothyroid snack")) {
+					}	
+					 else if (searchinput.equalsIgnoreCase("Hypothyroid snack")) {
 						try {
-							common.writeDataToExcel(scrapedData, "snackrecipes", searchinput);
+							common.writeDataToExcel(scrapedData, "snack_recipes", searchinput);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -320,19 +340,9 @@ public class HypothyroidTestCase extends BaseClass{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (searchinput.equalsIgnoreCase("Hypothyroid Lunch")) {
+					} else if (searchinput.equalsIgnoreCase("Jain Hypothyroid")) {
 						try {
-							common.writeDataToExcel(scrapedData, "lunch_recipes", searchinput);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} else if (searchinput.equalsIgnoreCase("Vegetarian Hypothyroid")) {
-						try {
-							common.writeDataToExcel(scrapedData, "Vegetarian_recipes", searchinput);
+							common.writeDataToExcel(scrapedData, "jain_Vegetarian_recipes", searchinput);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -342,10 +352,23 @@ public class HypothyroidTestCase extends BaseClass{
 						}
 					} 
 						
-						else if (searchinput.equalsIgnoreCase("Hypothyroid recipes")) {
+						else if (searchinput.equalsIgnoreCase("Non Veg Hypothyroid")) {
 							
 							try {
-								common.writeDataToExcel(scrapedData, "Hypothyroid_recipes", searchinput);
+								common.writeDataToExcel(scrapedData, "non_veg_Hypothyroid_recipes", searchinput);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						else if (searchinput.equalsIgnoreCase("Vegetarian Hypothyroid")) {
+							
+							try {
+								common.writeDataToExcel(scrapedData, "veg_Hypothyroid_recipes", searchinput);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -365,6 +388,5 @@ public class HypothyroidTestCase extends BaseClass{
 
 			}
 		}
-
 	}
 }
