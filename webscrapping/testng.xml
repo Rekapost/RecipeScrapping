@@ -6,15 +6,13 @@
 			
     <classes>  
        
-         <!--     <class name="testCases.VeganDiabeticWebScrapping"/>  -->
-                     
-      <!--   <class name="Eli.HypothyroidTestCase"/>       -->     
-     <!--   <class name="Eli.PCOS_TestCase"/>             -->
-     <!--   <class name="Eli.HypertensionTestCase"/>      -->    
-                     
-            <class name="Eli.Sample_DDT"/>    
-     <!--   <class name="testCases.dDT_Updated"/>        -->     
-     
+         <class name="ScrapTestCases.HypothyroidTestCase"/>          
+     <!--   <class name="ScrapTestCases.PCOS_TestCase"/>     -->         
+       <!-- <class name="ScrapTestCases.HypertensionTestCase"/>   -->                             
+       <!--  <class name="ScrapTestCases.Diabetic_DDT"/>      -->           
+        <!--  <class name="ScrapTestCases.AllergyScrapping"/>   --> 
+        <!--  <class name="ScrapTestCases.ToAddList"/>  --> 
+             
     </classes>
     
   </test> <!-- Test -->

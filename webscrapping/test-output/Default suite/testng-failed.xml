@@ -3,13 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Eli.Sample_DDT">
+      <class name="Eli.AllergyScrapping">
         <methods>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="loginWithInput"/>
+          <include name="allergy"/>
         </methods>
-      </class> <!-- Eli.Sample_DDT -->
+      </class> <!-- Eli.AllergyScrapping -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
