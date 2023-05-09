@@ -32,15 +32,15 @@ public class common_Utilities {
 		return false;
 	}
 
-	
-	public boolean hasToAddLists(List<String> ToAddItems, String recipeIngredients) {
-		for (String avoiditem : ToAddItems) {
-			if (recipeIngredients.contains(avoiditem.toUpperCase())) {
-				return true;
-			}
-		}
-		return false;
-	}
+//	
+//	public boolean hasToAddLists(List<String> ToAddItems, String recipeIngredients) {
+//		for (String avoiditem : ToAddItems) {
+//			if (recipeIngredients.contains(avoiditem.toUpperCase())) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 	public void writeDataToExcel(List<String[]> data, String sheetName, String searchinput) throws IOException {
 		XSSFWorkbook workbook = new XSSFWorkbook();
@@ -48,7 +48,7 @@ public class common_Utilities {
 
 		// Create header row
 		String[] headers = { "ReceipeID", "Recipe Name", "Page Title", "Ingredients", "Preparation Time",
-				"Cooking Time", "Method", "Nutrient Values", "URL" };
+				"Cooking Time", "Method", "Nutrient Values", "URL","Allergy_Filter", "To_Add_Filter"};
 		XSSFRow headerRow = sheet.createRow(0);
 		for (int i = 0; i < headers.length; i++) {
 			XSSFCell cell = headerRow.createCell(i);
@@ -73,76 +73,20 @@ public class common_Utilities {
 		}
 
 		// Save the workbook to a file
-		if (searchinput.equalsIgnoreCase("Vegan Diabetic")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_Diabetic_vegan.xlsx";
-			outputStream = new FileOutputStream(filename);
-		} else if (searchinput.equalsIgnoreCase("Jain Diabetic")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_jain_diabetic.xlsx";
-			outputStream = new FileOutputStream(filename);
-		} else if (searchinput.equalsIgnoreCase("Non Veg Diabetic")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_non_veg_Diabetic.xlsx";
-			outputStream = new FileOutputStream(filename);
-		} else if (searchinput.equalsIgnoreCase("Vegetarian Diabetic")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_veg_Diabetic.xlsx";
-			outputStream = new FileOutputStream(filename);
-		} else if (searchinput.equalsIgnoreCase("Diabetic recipes")) {
+		if (searchinput.equalsIgnoreCase("Diabetic Recipes")) {
 			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_Diabetic.xlsx";
 			outputStream = new FileOutputStream(filename);
-		}
-		//////////////////////////////////////////////////////////////
-		else if (searchinput.equalsIgnoreCase("Hypothyroid Breakfast")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_hypothyroid.xlsx";
+		} else if (searchinput.equalsIgnoreCase("Hypothyroid Recipes")) {
+			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_Hypothyroid.xlsx";
 			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Hypothyroid snack")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_jain_hypothyroid.xlsx";
+		} else if (searchinput.equalsIgnoreCase("High Blood Pressure")) {
+			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_Hypertension.xlsx";
 			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Jain Hypothyroid")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_non_veg_hypothyroid.xlsx";
+		} else if (searchinput.equalsIgnoreCase("PCOS Recipes")) {
+			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_PCOS.xlsx";
 			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Non Veg Hypothyroid")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_veg_hypothyroid.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Vegetarian Hypothyroid")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		//////////////////////////////////////////////////////////////////////////
-		else if (searchinput.equalsIgnoreCase("Vegan Hypertension")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Jain Hypertension")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_jain_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Non Veg Hypertension ")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_non_veg_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("Vegetarian Hypertension")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\recipes_veg_hypertension.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		////////////////////////////////////////////////////////////////////////////////////////
-		
-		else if (searchinput.equalsIgnoreCase("PCOS breakfast")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_breakfast.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		
-		else if (searchinput.equalsIgnoreCase("PCOS Weight Loss")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_Weight Loss";
-			outputStream = new FileOutputStream(filename);
-		}
-		else if (searchinput.equalsIgnoreCase("PCOS Indian")) {
-			filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\ScrapeData\\PCOS_Indian.xlsx";
-			outputStream = new FileOutputStream(filename);
-		}
-		
+		} 
+
 //        String filename = "C:\\Users\\Reka\\eclipse-workspace\\webscrapping\\src\\test\\resources\\recipes_final_s.xlsx";
 //        outputStream = new FileOutputStream(filename);
 		try {
@@ -153,5 +97,6 @@ public class common_Utilities {
 		}
 		workbook.close();
 		System.out.println("Data saved to " + filename);
+		System.out.println("\t*******");
 	}	
 }

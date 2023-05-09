@@ -4,13 +4,13 @@
   <test thread-count="4" name="ChromeTest(failed)" parallel="tests">
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="ScrapTestCases.HypothyroidTestCase">
+      <class name="ScrapTestCases.RecipeScrapping_DDT">
         <methods>
-          <include name="searchWithInput" invocation-numbers="0 1 2 3 4"/>
+          <include name="searchWithInput" invocation-numbers="0 1 2"/>
           <include name="setup"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- ScrapTestCases.HypothyroidTestCase -->
+      </class> <!-- ScrapTestCases.RecipeScrapping_DDT -->
     </classes>
   </test> <!-- ChromeTest(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

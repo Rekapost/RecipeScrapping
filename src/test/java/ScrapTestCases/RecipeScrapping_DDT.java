@@ -161,6 +161,7 @@ public class RecipeScrapping_DDT extends BaseClass {
 // ********************* Iterating through each recipe  and getting Id, Name and ingredients 
 			for (int r = 0; r < row_Size;) {
 				//System.out.println("Inside each Recipe");
+				System.out.println("\t*******");
 				System.out.println("Now In Recipe:" + r);
 				// System.out.println("No.of Rows in a page:" + noOfRecipePerPage);
 
@@ -182,7 +183,6 @@ public class RecipeScrapping_DDT extends BaseClass {
 					System.out.println("RecipeIDList : " + receipeIDList.get(r));
 					// Receipe Name
 					String recipeName = recipNam.getText();
-					System.out.println("\t*******");
 					System.out.println("Recipe Name : " + recipeName);
 					// WaitForElement(recipeNam);
 					recipNam.click();
@@ -275,7 +275,6 @@ public class RecipeScrapping_DDT extends BaseClass {
 
 					String recipe_id = url.replaceAll("[^0-9]", "");
 					System.out.println("Recipe #: " + recipe_id);
-					System.out.println();
 					// eachData.put("Recipe ID", recipe_id);
 
 					String reciepename = null;

@@ -5,13 +5,10 @@
 			<parameter name="browser" value="chrome" />
 			
     <classes>  
-       
-             <class name="ScrapTestCases.HypothyroidTestCase"/>          
-             <class name="ScrapTestCases.PCOS_TestCase"/>                   
-             <class name="ScrapTestCases.HypertensionTestCase"/>                                
-       <!--  <class name="ScrapTestCases.Diabetic_DDT"/>          -->           
-       <!--  <class name="ScrapTestCases.AllergyScrapping"/>      --> 
-       <!--  <class name="ScrapTestCases.ToAddList"/>             --> 
+                             
+            <class name="ScrapTestCases.RecipeScrapping_DDT"/>             
+      <!--  <class name="ScrapTestCases.Diabetic_Allergy_ToAdd_Scrapping"/>   -->   
+      
              
     </classes>
     

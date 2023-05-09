@@ -106,7 +106,7 @@ public class Diabetic_Allergy_ToAdd_Scrapping {
 		reader = new ExcelReadWrite(input_path);
 		// String toAdd = reader.getCellData("To_add", 0, 0);
 		int toAddSize = reader.getRowCount("diabetic_ToAdd");
-		System.out.println(" row size " + toAddSize);
+		System.out.println(" To ADD row size " + toAddSize);
 		System.out.println("Reading excel ");
 		List<String> to_AddList = new ArrayList<String>();
 		for (int d = 1; d <= toAddSize; d++) {
