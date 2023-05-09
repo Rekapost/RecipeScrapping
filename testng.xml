@@ -6,8 +6,8 @@
 			
     <classes>  
                              
-            <class name="ScrapTestCases.RecipeScrapping_DDT"/>             
-      <!--  <class name="ScrapTestCases.Diabetic_Allergy_ToAdd_Scrapping"/>   -->   
+             <class name="ScrapTestCases.RecipeScrapping_DDT"/>              
+    <!-- <class name="ScrapTestCases.Diabetic_Allergy_ToAdd_Scrapping"/>  -->    
       
              
     </classes>
