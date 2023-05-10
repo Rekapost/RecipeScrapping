@@ -30,12 +30,16 @@ public class RecipeScrapping_DDT extends BaseClass {
 	String eachRecipeNutrition;
 	List<WebElement> recipeIngredients;
 	WebElement recipe_Title;
+	String method;
+	String Nutritionlist;
 	String eachRecipeIng;
 	WebElement pagei;
 	String nutri;
+	String recipeName;
 	int noOfRows;
 	String prep_time;
 	String cook_time;
+	String url;
 	int i;
 	String search_input;
 	ExcelReadWrite reader;
@@ -182,7 +186,7 @@ public class RecipeScrapping_DDT extends BaseClass {
 							.findElement(By.xpath("//*[@id='" + receipeIDList.get(r) + "']/div[3]/span[1]/a"));
 					System.out.println("RecipeIDList : " + receipeIDList.get(r));
 					// Receipe Name
-					String recipeName = recipNam.getText();
+					recipeName = recipNam.getText();
 					System.out.println("Recipe Name : " + recipeName);
 					// WaitForElement(recipeNam);
 					recipNam.click();
@@ -191,7 +195,7 @@ public class RecipeScrapping_DDT extends BaseClass {
 							.findElement(By.xpath("//*[@id='" + receipeIDList.get(r) + "']/div[2]/span[1]/a"));
 					System.out.println("RecipeIDList : " + receipeIDList.get(r));
 					// Receipe Name
-					String recipeName = recipNam.getText();
+					recipeName = recipNam.getText();
 					System.out.println("Recipe Name : " + recipeName);
 					WaitForElement(recipNam);
 					// recipNam.click();
@@ -206,6 +210,9 @@ public class RecipeScrapping_DDT extends BaseClass {
 					RecpieIngredients = ingredients.getText();
 				} catch (Exception e) {
 					System.out.println(" ingredients not found");
+					driver.navigate().back();
+					Thread.sleep(1000);
+					r++;
 				}
 
 				if (searchinput.equalsIgnoreCase("Diabetic Recipes")) {
@@ -252,7 +259,7 @@ public class RecipeScrapping_DDT extends BaseClass {
 				}
 
 				if (checkContainEliminatedItems) {
-					String url = driver.getCurrentUrl();
+					url = driver.getCurrentUrl();
 					String recipe_id = url.replaceAll("[^0-9]", "");
 					System.out.println(
 							recipe_id + " Recipe is not recomeneded as it has Ingredients from Eliminated List");
@@ -270,16 +277,16 @@ public class RecipeScrapping_DDT extends BaseClass {
 					}catch(Exception e) {
 						System.out.println(" title head not present");
 					}
-					String url = driver.getCurrentUrl();
+					url = driver.getCurrentUrl();
 					// eachData.put("Recipe URL", url);
 
 					String recipe_id = url.replaceAll("[^0-9]", "");
 					System.out.println("Recipe #: " + recipe_id);
 					// eachData.put("Recipe ID", recipe_id);
 
-					String reciepename = null;
-					List<WebElement> Recipename = driver.findElements(By.id("ctl00_cntrightpanel_lblRecipeName"));
-					reciepename = Recipename.get(0).getText();
+//					//String reciepename = null;
+//					List<WebElement> Recipename = driver.findElements(By.id("ctl00_cntrightpanel_lblRecipeName"));
+//					String reciepename = Recipename.getText();
 
 					String pageTiltle = driver.getTitle();
 					// eachData.put("Page Title", pageTiltle);
@@ -302,19 +309,27 @@ public class RecipeScrapping_DDT extends BaseClass {
 					} catch(Exception e) {
 						System.out.println(" preparation time not available");
 					}
+					
+					try {
 					WebElement recipeMethod = driver
 							.findElement(By.xpath("//*[@id='ctl00_cntrightpanel_pnlRcpMethod']"));
-					String method = recipeMethod.getText();
+					 method = recipeMethod.getText();
 					// eachData.put("Preparation Method", method);
-
+					}catch(Exception e) {
+						System.out.println(" recipe method not found");
+					}
+					
+					try {
 					WebElement recipeNutrition = driver.findElement(By.xpath("//div[@id=\"accompaniments\"]"));
-					String Nutritionlist = recipeNutrition.getText();
+					Nutritionlist = recipeNutrition.getText();
 					// eachData.put("Nutrient values", Nutritionlist);
-
+					}catch(Exception e) {
+						System.out.println(" Nutrition not found");
+					}
 					driver.navigate().back();
 
 //****************************  storing all data and printing in excel 
-					String[] recipeData = { recipe_id, reciepename, title, RecpieIngredients, prep_time, cook_time,
+					String[] recipeData = { recipe_id, recipeName, title, RecpieIngredients, prep_time, cook_time,
 							method, Nutritionlist, url };
 					scrapedData.add(recipeData);
 
